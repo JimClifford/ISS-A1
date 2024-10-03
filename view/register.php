@@ -16,8 +16,8 @@
         <?php endif; ?>
         <form id="registrationForm" action="../controllers/register_controller.php" method="post">
             <div class="form-group">
-                <label for="fullName">Full Name:</label>
-                <input type="text" id="fullName" name="fullName" required>
+                <label for="fullName">User Name:</label>
+                <input type="text" id="user_name" name="user_name" required>
             </div>
             <div class="form-group">
                 <label for="email">Email (Ashesi email only):</label>
@@ -26,18 +26,6 @@
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-            </div>
-            <div class="form-group">
-                <label for="country">Country:</label>
-                <input type="text" id="country" name="country" required>
-            </div>
-            <div class="form-group">
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city" required>
-            </div>
-            <div class="form-group">
-                <label for="contactNumber">Contact Number:</label>
-                <input type="tel" id="contactNumber" name="contactNumber" required>
             </div>
             <div class="form-group">
                 <input type="submit" value="Register">

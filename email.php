@@ -21,7 +21,7 @@ try {
 
     // Sender and recipient settings
     $mail->setFrom('jim200118@gmail.com', 'Jim');   // Set the sender of the email
-    $mail->addAddress('naalboye@gmail.com');              // Add recipient
+    $mail->addAddress('jimcliffordedward@gmail.com');              // Add recipient
 
     // Subject and message body
     $random_number = rand(1000, 9999);                     // Generate a random 4-digit number

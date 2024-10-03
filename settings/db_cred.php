@@ -3,6 +3,6 @@
 $servername = "localhost";
 $username = 'root';
 $password = "";
-$dbname = "foos";
+$dbname = "issdb";
 
 ?>

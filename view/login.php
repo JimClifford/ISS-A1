@@ -11,8 +11,8 @@
         <h2>Login</h2>
         <form id="loginForm" action="../controllers/login_controller.php" method="POST"> 
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email">User Name</label>
+                <input type="username" id="user_name" name="user_name" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
