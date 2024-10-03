@@ -14,7 +14,7 @@
         <?php if (isset($error)): ?>
         <p style="color:red;"><?php echo $error; ?></p>
         <?php endif; ?>
-        <form id="registrationForm" action="../controllers/register_controller.php" method="post">
+        <form id="registrationForm" action="../actions/add_user_action.php" method="post">
             <div class="form-group">
                 <label for="fullName">User Name:</label>
                 <input type="text" id="user_name" name="user_name" required>

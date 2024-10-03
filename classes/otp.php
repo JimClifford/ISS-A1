@@ -53,5 +53,6 @@ class OTP {
 
         return false;  // OTP is invalid or expired
     }
+
 }
 ?>

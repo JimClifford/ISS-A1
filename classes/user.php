@@ -42,5 +42,20 @@ class User {
         // Fetch and return user if found
         return $this->db->db_fetch_one($sql);
     }
-}
+
+    public function getUserIdByEmail($email) {
+        // Sanitize the email input
+        $email = mysqli_real_escape_string($this->db->db_conn(), $email);
+        
+        // Create the SQL query to fetch the user id based on the email
+        $sql = "SELECT id FROM user_details WHERE email = '$email'";
+        
+        // Fetch and return the user id if found
+        $result = $this->db->db_fetch_one($sql);
+        
+        // Return the user id if found, otherwise return false
+        return $result ? $result['id'] : false;
+    }
+    
+} 
 ?>
