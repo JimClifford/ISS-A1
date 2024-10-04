@@ -31,17 +31,31 @@ class User {
    
     // Method to validate user login
     public function validateUser($user_name, $password) {
+        // Sanitize the input values to prevent SQL injection
         $user_name = mysqli_real_escape_string($this->db->db_conn(), $user_name);
-        $password = mysqli_real_escape_string($this->db->db_conn(), $password);
-
-        // Encrypt password (md5 or you can use password_hash() and password_verify())
-        $hashed_password = md5($password);
-
-        $sql = "SELECT * FROM user_details WHERE user_name = '$user_name' AND password = '$hashed_password'";
-
-        // Fetch and return user if found
-        return $this->db->db_fetch_one($sql);
+        
+        // SQL query to fetch user details based on the provided username
+        $sql = "SELECT * FROM user_details WHERE user_name = '$user_name'";
+        
+        // Fetch the user record from the database
+        $user = $this->db->db_fetch_one($sql);
+    
+        // Check if user exists
+        if ($user) {
+            // Verify the entered password against the hashed password in the database
+            if (password_verify($password, $user['password'])) {
+                // If password is valid, return user data
+                return $user;
+            } else {
+                // If password does not match, return false
+                return false;
+            }
+        } else {
+            // If no user is found, return false
+            return false;
+        }
     }
+    
 
     public function getUserIdByEmail($email) {
         // Sanitize the email input

@@ -14,18 +14,18 @@ class OTP {
 
 
     // Generate a random OTP
-    public function generateOTP($userId) {
+    public function generateOTP($email) {
         // Generate a random 6-digit number
         $otp = rand(100000, 999999);
     
         // Update the database with the generated OTP and current timestamp
-        $sql = "UPDATE user_details SET auth_pin = '$otp' WHERE id = '$userId'";
+        $sql = "UPDATE user_details SET auth_pin = '$otp' WHERE email = '$email'";
         
         // Prepare and execute the statement
-        $run_query = $this->db->db_query($sql);
         
-        if ($run_query) {
-            return true; // Return the generated OTP if the update is successful
+    
+        if ($this->db->db_query($sql)) {
+            return $otp; // Return the generated OTP if the update is successful
         } else {
             return false; // Return false if the update fails
         }
@@ -42,13 +42,16 @@ class OTP {
 
         // Check if the OTP matches and if it is within the expiry time
         if ($result['auth_pin'] === $enteredOTP) {
-            // Calculate the time difference in seconds
-            $timeDifference = time() - strtotime($result['last_update']);
+            $lastUpdate = strtotime($result['last_update']); // Convert last_update to Unix timestamp
+            $currentTime = time(); // Get the current Unix timestamp
 
-            // Validate if the OTP is still valid
-            if ($timeDifference <= $this->expiryTime) {
+            // Calculate time difference in seconds
+            $timeDifference = $lastUpdate  - $currentTime ;
+            if ($timeDifference <= -120) {
                 return true;  // OTP is valid
             }
+            
+            
         }
 
         return false;  // OTP is invalid or expired

@@ -9,10 +9,10 @@
 <body>
     <div class="login-container">
         <h2>Login</h2>
-        <form id="loginForm" action="../actions/user_login_action.php" method="POST"> 
+        <form id="loginForm" action="../actions/login_user_action.php" method="POST"> 
             <div class="form-group">
                 <label for="email">User Name</label>
-                <input type="username" id="user_name" name="user_name" required>
+                <input type="user_name" id="user_name" name="user_name" required>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>

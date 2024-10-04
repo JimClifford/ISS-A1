@@ -1,41 +1,40 @@
 <?php
+session_start();
 require('../controllers/login_controller.php');
 require('../controllers/otp_controller.php');
-session_start();
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Get form data
-    $email = $_POST['user_name'];
+    $user_name = $_POST['user_name'];
     $password = $_POST['password'];
    
     $user = new User();
-       // Validate the form data
+       
+    // Validate user credentials
     $result = $user->validateUser($user_name, $password);
-
+    
     if ($result) {
-            // Success - redirect or display a success message
-        $user_id = $user->getUserIdByEmail($email);
-        $user_id = $_SESSION['user_id'];
-        $user_name = $_SESSION["User"];
-        if (generateOTPController($user_id)){
-        header("Location: ../view/otp.php"); // Redirect to a otp page
-        exit();   
+        // Set session variables after successful login
+        $_SESSION['user_id'] = $result['id'];  // Assuming the result contains 'id'
+        $_SESSION["user"] = $result['user_name']; // Assuming the result contains 'user_name'
 
+        // Generate OTP for the user
+        if (sendOTPController($result['email'])) {
+            // Redirect to OTP page
+            header("Location: ../view/otp.php");
+            exit();  // Always exit after header redirects
         } else {
             $error = "There was an issue. Please try again.";
             header("Location: ../view/login.php");
-        };
-        
+            exit();
+        }
     } else {
-            $error = "Login failed. Please try again.";
-            header("Location: ../view/login.php");
-     }
-    
+        // Failed login
+        $error = "Login failed. Please try again.";
+        header("Location: ../view/login.php");
+        exit();
+    }
 }
-
-
-
-
-
 ?>

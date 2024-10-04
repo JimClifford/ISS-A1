@@ -1,27 +1,27 @@
 <?php
-require(`../classes/otp.php`);
-require ('vendor/autoload.php'); // This automatically includes all the required files
+require('../classes/otp.php');
+require ('../vendor/autoload.php'); // This automatically includes all the required files
 
 // Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-function generateOTPController($userId) {
-    // Create an instance of the OTP class
-    $newOtp = new Otp();
+    // function generateOTPController($userId) {
+    //     // Create an instance of the OTP class
+    //     $newOtp = new Otp();
 
-    $otp = $newOtp->generateOTP($userId);
-    if ($otp != false) {
-        return true;
-    } else {
-        return false;
-    }
+    //     $otp = $newOtp->generateOTP($userId);
+    //     if ($otp != false) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
 
 
 
-    
-}
+        
+    // }
 
 function validateOTPController($userId, $otp) {
     // Create an instance of the OTP class
