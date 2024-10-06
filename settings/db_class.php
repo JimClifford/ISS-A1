@@ -95,6 +95,7 @@ class db_connection
 	/**
 	*get select data
 	*@return a record
+	
 	**/
 	function db_fetch_one($sql){
 		
