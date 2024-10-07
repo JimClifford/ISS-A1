@@ -1,35 +1,40 @@
 <?php
-// Include the OTP controller
 require('../controllers/otp_controller.php');
 
 session_start();
 
-// Check if the user is logged in (user_id is set in the session)
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to login if session is invalid
-    header("Location: ../view/login.php");
-    exit();
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Get form data
-    $userOtpInput = $_POST['otp'];
-    $user_id = $_SESSION['user_id'];
-    
-    // Validate the OTP using the controller
-    ;
-    
-    if (validateOTPController($user_id,$userOtpInput)) {
-        // Success - redirect or display a success message
-        header("Location: ../view/success.php"); // Redirect to a success page
-        exit();
+    if (isset($_POST['action']) && $_POST['action'] === 'request_new_otp') {
+        // Handle new OTP generation
+        if (isset($_SESSION['user_email'])) {
+            $email = $_SESSION['user_email'];
+            
+            if (sendOTPController($email)) {
+                echo "Success";  // Response for JavaScript
+            } else {
+                http_response_code(500);  // Internal Server Error
+                echo "Failed to generate OTP";
+            }
+        } else {
+            http_response_code(400);  // Bad Request
+            echo "User email not found in session.";
+        }
     } else {
-        // OTP validation failed, redirect back to OTP page with an error
-        $error = "OTP validation failed. Please try again.";
-        header("Location: ../view/otp.php?error=" . urlencode($error));
-        exit();
+        // Original OTP validation logic here
+        if (isset($_SESSION['user_id']) && isset($_POST['otp'])) {
+            $user_id = $_SESSION['user_id'];
+            $userOtpInput = $_POST['otp'];
+            
+            if (validateOTPController($user_id, $userOtpInput)) {
+                header("Location: ../view/success.php");
+                exit();
+            } else {
+                $error = "OTP validation failed. Please try again.";
+                header("Location: ../view/otp.php?error=" . urlencode($error));
+                exit();
+            }
+        }
     }
 }
 ?>

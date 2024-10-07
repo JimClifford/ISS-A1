@@ -17,14 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if ($result) {
         // Set session variables after successful login
-        $_SESSION['user_id'] = $result['id'];  // Assuming the result contains 'id'
-        $_SESSION["user"] = $result['user_name']; // Assuming the result contains 'user_name'
+        $_SESSION['user_id'] = $result['id'];  
+        $_SESSION["user"] = $result['user_name']; 
 
         // Generate OTP for the user
         if (sendOTPController($result['email'])) {
             // Redirect to OTP page
             header("Location: ../view/otp.php");
-            exit();  // Always exit after header redirects
+            exit();  
         } else {
             $error = "There was an issue. Please try again.";
             header("Location: ../view/login.php");

@@ -1,6 +1,6 @@
 <?php
 // Include the db_connection class
-require('../settings/db_class.php');
+require ('../settings/db_class.php');
 
 class User {
     // Property to hold the database connection
@@ -18,7 +18,7 @@ class User {
         $email = mysqli_real_escape_string($this->db->db_conn(), $email);
         $password = mysqli_real_escape_string($this->db->db_conn(), $password);
         
-        // Encrypt password (optional: use password_hash() for better security)
+        // Encrypt password
         $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
         // SQL query to insert the user

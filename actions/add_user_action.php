@@ -13,21 +13,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $newUser = registerController($name, $email, $password);
 
     if ($newUser !== false) {
-            
-            header("Location: ../view/login.php"); 
-            exit();
+        header("Location: ../view/login.php"); 
+        exit();
     } else {
-            $error = "Registration failed. Please try again.";
-            header("Location: ../view/register.php");
+        $error = "Registration failed. Please try again.";
+        header("Location: ../view/register.php");
     }
     
-}
-
-
-
-
-
-
+} else {
+        echo "Registration failed. Please try again.";
+        exit();
+    }
 
 
 ?>
