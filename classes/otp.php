@@ -33,24 +33,29 @@ class OTP {
         }
     }
 
-    // Validate if the OTP is still valid
+    // Function to validate OTP
     public function validateOTP($userId, $enteredOTP) {
-        // Fetch the last_update, auth_pin, and otp_expiry timestamp for the user
+        // Fetch the OTP details for the user
         $sql = "SELECT last_update, auth_pin, otp_expiry FROM user_details WHERE id = '$userId'";
         $result = $this->db->db_fetch_one($sql);
-
-        // Check if the OTP matches and is within the expiry time
-        if ($result && $result['auth_pin'] === $enteredOTP) {
-            $otpExpiry = strtotime($result['otp_expiry']); // Convert otp_expiry to Unix timestamp
-            $currentTime = time(); // Get the current Unix timestamp
-
-            // Check if the current time is before the OTP expiry time
-            if ($currentTime <= $otpExpiry) {
-                return true;  // OTP is valid
+        
+        $currentTime = time(); // Get the current Unix timestamp
+        
+        // Check if the OTP matches
+        if ($result['auth_pin'] === $enteredOTP) {
+            // Check if OTP has expired
+            if ($currentTime <= strtotime($result['otp_expiry'])) {
+                // OTP is valid, mark it as used
+                $updateSql = "UPDATE user_details SET auth_pin = NULL, otp_expiry = NULL WHERE id = '$userId'";
+                $this->db->db_query($updateSql);
+                return "valid";  // OTP is valid
+            } else {
+                return "expired";  // OTP is expired
             }
         }
-
-        return false;  // OTP is invalid or expired
+        
+        return "invalid";  // OTP is invalid}
     }
+    
 }
 ?>

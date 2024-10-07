@@ -23,18 +23,23 @@ use PHPMailer\PHPMailer\Exception;
     // }
 
 
-function validateOTPController($userId, $otp) {
-    // Create an instance of the OTP class
-    $newOtp = new OTP();
-
-    // Call the validateOTP method and handle the result
-    $isValid = $newOtp->validateOTP($userId, $otp);
-    if ($isValid) {
-        return true;  // OTP is valid
-    } else {
-        return false; // OTP is invalid or expired
+    function validateOTPController($userId, $otp) {
+        // Create an instance of the OTP class
+        $newOtp = new OTP();
+    
+        // Call validateOTP function to check OTP validity
+        $command = $newOtp->validateOTP($userId, $otp);
+    
+        // Check the result and return appropriate messages
+        if ($command === "valid") {
+            return "OTP is valid";
+        } elseif ($command === "expired") {
+            return "OTP is expired";
+        } else {
+            return "Invalid OTP";
+        }
     }
-}
+    
 
 function sendOTPController($email) {
     // Create an instance of the OTP class

@@ -5,11 +5,13 @@ session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    // Handle new OTP generation request
     if (isset($_POST['action']) && $_POST['action'] === 'request_new_otp') {
-        // Handle new OTP generation
+        // Ensure user's email is stored in the session
         if (isset($_SESSION['user_email'])) {
             $email = $_SESSION['user_email'];
             
+            // Send the OTP and respond to the request
             if (sendOTPController($email)) {
                 echo "Success";  // Response for JavaScript
             } else {
@@ -21,17 +23,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "User email not found in session.";
         }
     } else {
-        // Original OTP validation logic here
+        // OTP validation logic
         if (isset($_SESSION['user_id']) && isset($_POST['otp'])) {
             $user_id = $_SESSION['user_id'];
             $userOtpInput = $_POST['otp'];
-            
-            if (validateOTPController($user_id, $userOtpInput)) {
-                header("Location: ../view/success.php");
+
+            // Validate the OTP
+            $validationResult = validateOTPController($user_id, $userOtpInput);
+
+            if ($validationResult === "OTP is valid") {
+                // Redirect to success page if OTP is valid
+                header("Location: ../view/success_page.php");
                 exit();
             } else {
-                $error = "OTP validation failed. Please try again.";
-                header("Location: ../view/otp.php?error=" . urlencode($error));
+                // Redirect back with an error message if OTP is invalid or expired
+                header("Location: ../view/otp.php?error=" . urlencode($validationResult));
                 exit();
             }
         }
