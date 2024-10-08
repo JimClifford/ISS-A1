@@ -8,7 +8,9 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h1>Ashesi Saints 2FA System..</h1>
+
+        <h2>Login Page</h2>
         <form id="loginForm" action="../actions/login_user_action.php" method="POST"> 
             <div class="form-group">
                 <label for="email">User Name</label>

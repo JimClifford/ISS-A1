@@ -10,6 +10,8 @@
 </head>
 <body>
     <div class="container">
+        <h1>Ashesi Saints 2FA System.</h1>
+
         <h2>Register</h2>
         <?php if (isset($error)): ?>
         <p style="color:red;"><?php echo $error; ?></p>
