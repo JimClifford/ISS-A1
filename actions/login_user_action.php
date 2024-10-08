@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // Failed login
-        $error = "Login failed. Please try again.";
+        $error = "Invalid credentials. Please check your input and try again.";
         header("Location: ../view/login.php?error=" . urlencode($error));
         exit();
     }

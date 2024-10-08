@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h1>Ashesi Saints 2FA System..</h1>
+        <h1>Ashesi Saints 2FA System</h1>
 
         <h2>Login Page</h2>
 <!--Form Area-->

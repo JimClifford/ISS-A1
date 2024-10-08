@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Ashesi Saints 2FA System.</h1>
+        <h1>Ashesi Saints 2FA System</h1>
 
         <h2>Register</h2>
         <?php if (isset($error)): ?>
@@ -28,7 +28,9 @@
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}" 
+                    title="Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, one number, and one special character.">
             </div>
             <div class="form-group">
                 <input type="submit" value="Register">
