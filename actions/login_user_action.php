@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Set session variables after successful login
         $_SESSION['user_id'] = $result['id'];  // Assuming the result contains 'id'
         $_SESSION["user"] = $result['user_name']; // Assuming the result contains 'user_name'
+        $_SESSION['email'] = $result['email'];
 
         // Generate OTP for the user
         if (sendOTPController($result['email'])) {
@@ -27,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();  // Always exit after header redirects
         } else {
             $error = "There was an issue. Please try again.";
-            header("Location: ../view/login.php");
+            header("Location: ../view/login.php?error=" . urlencode($error));
             exit();
         }
     } else {
         // Failed login
         $error = "Login failed. Please try again.";
-        header("Location: ../view/login.php");
+        header("Location: ../view/login.php?error=" . urlencode($error));
         exit();
     }
 }

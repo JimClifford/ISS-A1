@@ -18,6 +18,16 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <div class="error" id="error">
+                <?php
+                // Display error message if OTP validation fails
+                if (isset($_GET['error'])) {
+                    echo htmlspecialchars($_GET['error']);
+                }
+                ?>
+            </div>
+
+
             <button type="submit">Login</button>
         </form>
         
