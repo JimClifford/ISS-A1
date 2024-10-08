@@ -11,6 +11,7 @@
         <h1>Ashesi Saints 2FA System..</h1>
 
         <h2>Login Page</h2>
+<!--Form Area-->
         <form id="loginForm" action="../actions/login_user_action.php" method="POST"> 
             <div class="form-group">
                 <label for="email">User Name</label>
@@ -29,7 +30,7 @@
                 ?>
             </div>
 
-
+            <!--Login Area-->
             <button type="submit">Login</button>
         </form>
         

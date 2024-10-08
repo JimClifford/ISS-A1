@@ -44,23 +44,32 @@ class OTP {
         $result = $this->db->db_fetch_one($sql);
         
         $currentTime = time(); // Get the current Unix timestamp
-        
+        $timeDifference = $currentTime - strtotime($result['last_update']);
         // Check if the OTP matches
-        if ($result['auth_pin'] === $enteredOTP) {
+        if ($result['auth_pin'] == $enteredOTP) {
             // Check if OTP has expired
-            if (($currentTime - strtotime($result['otp_expiry'])) <= 120) {
+            if ($timeDifference <= 120) {
+                
+                
                 // OTP is valid, mark it as used
                 $updateSql = "UPDATE user_details SET auth_pin = NULL, otp_expiry = NULL WHERE id = '$userId'";
                 $this->db->db_query($updateSql);
                 return "valid";  // OTP is valid
-            } else {
-                return "expired";  // OTP is expired
+            } 
+            else {
+                // OTP is expired
+                return "expired";
             }
         }
         
-        return "invalid";  // OTP is invalid}
+        else {
+            // OTP is wrong
+                return "invalid"; // OTP is expired or invalid
+            };
+        }
+        
+    
     }
-}
 
 
     

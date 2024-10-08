@@ -16,13 +16,14 @@
         <?php if (isset($error)): ?>
         <p style="color:red;"><?php echo $error; ?></p>
         <?php endif; ?>
+        <!--Form Input Area-->
         <form id="registrationForm" action="../actions/add_user_action.php" method="post">
             <div class="form-group">
                 <label for="fullName">User Name:</label>
                 <input type="text" id="user_name" name="user_name" required>
             </div>
             <div class="form-group">
-                <label for="email">Email (Ashesi email only):</label>
+                <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">

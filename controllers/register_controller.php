@@ -8,7 +8,7 @@ function registerController($user_name, $email, $password) {
     // Create an instance of the User class
     $newUser = new User();
 
-    // Return the addUser method
+    // Return the User Detail
     return $newUser->addUser($user_name, $email, $password);
 
 }

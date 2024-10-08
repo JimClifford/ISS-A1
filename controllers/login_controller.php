@@ -15,7 +15,7 @@ function getUserID($email) {
     // Create an instance of the User class
     $newUser = new User();
 
-    // Return the addUser method
+    // Return the User Details
     return $newUser->getUserIdByEmail($email);
 }
 

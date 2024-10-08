@@ -7,21 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-    // function generateOTPController($userId) {
-    //     // Create an instance of the OTP class
-    //     $newOtp = new Otp();
-
-    //     $otp = $newOtp->generateOTP($userId);
-    //     if ($otp != false) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-
-
-
-        
-    // }
+    
 
     function validateOTPController($userId, $otp) {
         // Create an instance of the OTP class
@@ -33,11 +19,9 @@ use PHPMailer\PHPMailer\Exception;
         // Check the result and return appropriate messages
         if ($command == "valid") {
             return true;
-        } elseif ($command == "expired") {
-            return false;
         } else {
             return false;
-        }
+        } 
     }
 
 
@@ -52,17 +36,17 @@ function sendOTPController($email) {
     if ($otp != false){
         try {
             // SMTP server configuration
-            $mail->isSMTP();                                      // Use SMTP
-            $mail->Host = 'smtp.gmail.com';                       // Set the SMTP server to send through
-            $mail->SMTPAuth = true;                               // Enable SMTP authentication
-            $mail->Username = 'jim200118@gmail.com';             // SMTP username (your Gmail email)
-            $mail->Password = 'wdmq chpf hahi dthf';                // SMTP password (use App Password if 2FA is enabled)
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption
-            $mail->Port = 587;                                    // TCP port to connect to
+            $mail->isSMTP();                                      
+            $mail->Host = 'smtp.gmail.com';                       
+            $mail->SMTPAuth = true;                               
+            $mail->Username = 'jim200118@gmail.com';            
+            $mail->Password = 'wdmq chpf hahi dthf';               
+            $mail->SMTPSecure = 'tls';                            
+            $mail->Port = 587;                                    
         
             // Sender and recipient settings
-            $mail->setFrom('jim200118@gmail.com', 'Ashesi Saints');   // Set the sender of the email
-            $mail->addAddress($email);              // Add recipient
+            $mail->setFrom('jim200118@gmail.com', 'Ashesi Saints');   
+            $mail->addAddress($email);              
         
             // Subject and message body
                                  // Generate a random 4-digit number
@@ -72,7 +56,9 @@ function sendOTPController($email) {
             // Send the email
             $mail->send();
             return true;
+
         } catch (Exception $e) {
+            // catch errors
             return false;
         }
 

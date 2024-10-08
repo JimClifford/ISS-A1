@@ -11,12 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Validate the form data
     $newUser = registerController($name, $email, $password);
-
+    // if the register process was successful
     if ($newUser !== false) {
             
             header("Location: ../view/login.php"); 
             exit();
     } else {
+        // if the registration was unsuccessful
             $error = "Registration failed. Please try again.";
             header("Location: ../view/register.php");
     }

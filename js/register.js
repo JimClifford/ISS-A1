@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Email validation
         const email = document.getElementById('email');
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@ashesi\.edu\.gh$/;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (!emailRegex.test(email.value)) {
-            showError(email, 'Please enter a valid Ashesi email address');
+            showError(email, 'Please enter a valid email address');
             isValid = false;
         } else {
             removeError(email);

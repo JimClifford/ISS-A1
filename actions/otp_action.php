@@ -31,13 +31,13 @@ if (isset($_POST['action']) && $_POST['action'] == 'regenerate_otp') {
 // Check if the form is submitted for OTP validation
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    // Get form data
+    // Get form inputs
     $userOtpInput = $_POST['otp'];
     $user_id = $_SESSION['user_id'];
     
     // Validate the OTP using the controller
     if (validateOTPController($user_id, $userOtpInput)) {
-        // Success - redirect or display a success message
+        // Success - redirect to success page
         header("Location: ../view/success.php"); // Redirect to a success page
         exit();
     } else {

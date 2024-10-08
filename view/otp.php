@@ -128,7 +128,7 @@
 }   
 
 function startCountdown() {
-            var countdownTime = 50; // 50 seconds countdown
+            var countdownTime = 120; // 2 minute countdown
             var countdownElement = document.getElementById("countdown");
 
             countdownElement.innerHTML = "Please wait " + countdownTime + " seconds before requesting a new OTP.";
